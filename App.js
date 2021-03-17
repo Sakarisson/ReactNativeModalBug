@@ -1,15 +1,22 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, Text, Modal, Alert} from 'react-native';
+import {SafeAreaView, View, Text, Modal} from 'react-native';
+import BackgroundGeolocation from 'react-native-background-geolocation';
 
 const App = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    Alert.alert('ALERT');
+    setTimeout(() => {
+      setVisible(true);
+    }, 100);
   }, []);
 
   useEffect(() => {
-    setVisible(true);
+    BackgroundGeolocation.onLocation(() => {});
+
+    BackgroundGeolocation.ready({}, () => {
+      BackgroundGeolocation.start();
+    });
   }, []);
 
   return (
